@@ -282,14 +282,16 @@ def paginate(context, window=DEFAULT_WINDOW, margin=DEFAULT_MARGIN):
         if window_end > paginator.num_pages:
             window_start = window_start - (window_end - paginator.num_pages)
             window_end = paginator.num_pages
-        pages = page_range[window_start:window_end]
+
+        page_range_list = list(page_range)
+        pages = page_range_list[window_start:window_end]
 
         # figure margin and add elipses
         if margin > 0:
             # figure margin
             tmp_pages = set(pages)
-            tmp_pages = tmp_pages.union(page_range[:margin])
-            tmp_pages = tmp_pages.union(page_range[-margin:])
+            tmp_pages = tmp_pages.union(page_range_list[:margin])
+            tmp_pages = tmp_pages.union(page_range_list[-margin:])
             tmp_pages = list(tmp_pages)
             tmp_pages.sort()
             pages = []
